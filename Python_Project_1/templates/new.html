@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Add new item to the shop</h2>
+
+<form name="Form" action="../items/" method="POST" onsubmit="return validate();">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" required><br>
+  <label for="size">Size:</label><br>
+  <input type="text" id="size" name="size" required><br>
+  <label for="color">Color:</label><br>
+  <input type="text" id="color" name="color" required><br>
+  <label for="price">Price:</label><br>
+  <input type="number" id="price" name="price" value="0" step="0.01" required><br><br>
+  <input type="submit" value="ADD">
+</form> 
+
+<script>
+    function validate(){
+        var price = document.forms["Form"]["price"].value;
+        if (price <= 0){
+        	alert("Price should be more than 0!!!");
+        	return false;
+        }
+
+        var name = document.forms["Form"]["name"].value;
+        var size = document.forms["Form"]["size"].value;
+        var color = document.forms["Form"]["color"].value;
+
+        if (size.length > 3){
+            alert("Size should have only 3 characters!!!");
+            return false;
+        }
+        
+        var check_name = check(name);
+        var check_size = check(size);
+        var check_color = check(color);
+
+        if (!check_name){
+        	alert("Name should start with letter or number!!!");
+        	return false;
+        }
+
+        if (!check_size){
+        	alert("Size should start with letter or number!!!");
+        	return false;
+        }
+
+        if (!check_color){
+        	alert("Color should start with letter or number!!!");
+        	return false;
+        }
+
+        return true;
+    }
+
+    function check(string){
+        var pattern = /^[a-zA-Z0-9]+\D{0,}/;
+        let result = string.match(pattern);
+
+        if (string==result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+
+
+</body>
+</html>
